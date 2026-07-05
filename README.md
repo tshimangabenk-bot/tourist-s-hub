@@ -33,6 +33,7 @@ adventure.
 | 04 | **Transit & Bus-Culture Buffer** (`/transit`) | Culture shock — onboarding for the "fill-to-capacity" bus model with realistic time buffers and local snack tips. |
 | 05 | **Learn Zambian Languages** (`/languages`) | Feeling like an outsider — practical phrases in Bemba, Nyanja, Tonga and Lozi, with browser text-to-speech. |
 | 06 | **Local Orientation Map** (`/map`) | No sense of place — an interactive, filterable map of falls, parks, lakes, cities and cultural sites. |
+| 07 | **Trending Now** (`/news`) | Stale expectations — a live, ranked news feed powered by **Firebase Firestore** covering Falls levels, wildlife, weather, culture and transport. |
 
 ## Architecture
 
@@ -44,21 +45,78 @@ src/
 │   ├── packing/          # Module 03
 │   ├── transit/          # Module 04
 │   ├── languages/        # Module 05
-│   └── map/              # Module 06
+│   ├── map/              # Module 06
+│   └── news/             # Module 07 — Firebase-backed trending feed
 ├── components/           # Header, footer, shared controls, feature widgets
 │   └── ItineraryContext.tsx  # Context-API state (month / park / budget)
 └── lib/
     ├── types.ts          # Shared domain types
     ├── scale.ts          # Bush Reality Scale definitions
-    └── data/             # Local JSON-style datasets (water, lodges, climate, transit, languages, maps)
+    ├── firebase.ts       # Firebase init (env-driven, graceful fallback)
+    ├── news.ts           # getTrendingNews(): Firestore with local fallback
+    └── data/             # Local datasets (water, lodges, climate, transit, languages, maps, news)
 ```
 
 - **State management:** a lightweight **Context API** store (`ItineraryContext`)
   holds the traveller's **month, destination and budget** and persists them to
   `localStorage`, so selections carry across modules.
 - **Data handling:** a clean, typed local dataset under `src/lib/data`
-  simulating real-world climate, river-flow and lodge-infrastructure data. It
-  could be swapped for a Supabase backend without touching the UI.
+  simulating real-world climate, river-flow and lodge-infrastructure data. The
+  **Trending Now** module reads live from **Firebase Firestore**, and every
+  other reference dataset could be migrated to Firestore the same way without
+  touching the UI.
+
+## Firebase & trending news
+
+The `/news` module is backed by **Firebase Firestore**. It works in two modes:
+
+- **Demo mode (no config):** shows the bundled sample stories from
+  `src/lib/data/news.ts`. Nothing to set up.
+- **Live mode:** reads the Firestore `news` collection, ordered by
+  `trendingScore`.
+
+### Go live in 3 steps
+
+1. **Create a Firebase project** at <https://console.firebase.google.com>, add a
+   Web app, and enable **Firestore Database**.
+2. **Add config:** copy `.env.example` → `.env.local` and paste your Web app
+   config values (`NEXT_PUBLIC_FIREBASE_*`). Deploy the rules in
+   `firestore.rules` (public read, no public write).
+3. **Add stories.** A `news` document looks like:
+
+   ```jsonc
+   {
+     "title": "Victoria Falls hits peak flow early",
+     "summary": "Above-average Zambezi flow heading into flood season…",
+     "category": "Falls",            // Falls | Wildlife | Travel | Culture | Weather | Transport
+     "source": "Zambezi River Authority",
+     "url": "https://…",             // optional
+     "publishedAt": "2026-03-28",     // ISO date
+     "trendingScore": 96,             // 0-100, higher trends first
+     "tags": ["victoria falls", "water level"]
+   }
+   ```
+
+   Seed the sample set quickly (temporarily allow writes in test mode first):
+
+   ```bash
+   npm run seed:news        # uses .env.local via node --env-file
+   ```
+
+### How to keep news genuinely "trending"
+
+Pick whichever fits your needs — the UI doesn't change:
+
+1. **Admin-curated:** add/update `news` docs from the Firebase console or a small
+   admin screen. Simple and free.
+2. **Automated (recommended for real trends):** a **Firebase Cloud Function** on
+   a schedule (Cloud Scheduler / `pubsub.schedule`) that pulls from an RSS feed
+   or a news API (e.g. a Zambia tourism feed, GDELT, or NewsAPI), computes a
+   `trendingScore` from recency + engagement, and writes the results to the
+   `news` collection with the Admin SDK. The website then always shows the
+   latest ranked items.
+3. **Hybrid:** automated ingestion plus manual pinning/curation of featured
+   stories.
 
 ## Getting started
 
@@ -82,3 +140,4 @@ npm run lint     # eslint
 - TypeScript
 - Tailwind CSS v4
 - Context API for client state
+- Firebase / Firestore for the live trending-news feed

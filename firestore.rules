@@ -1,0 +1,13 @@
+rules_version = '2';
+
+// Trending news is public to read. Writes should come from a trusted source
+// (the Firebase Admin SDK in a Cloud Function, or the console) — never the
+// public web client. For a quick local seed you can temporarily allow writes.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /news/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
