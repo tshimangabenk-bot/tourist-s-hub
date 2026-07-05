@@ -11,6 +11,7 @@ const NAV = [
   { href: "/transit", label: "Bus Culture" },
   { href: "/languages", label: "Languages" },
   { href: "/map", label: "Map" },
+  { href: "/news", label: "Trending" },
 ];
 
 export function SiteHeader() {

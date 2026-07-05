@@ -49,6 +49,14 @@ const FEATURES = [
     solution:
       "An interactive map of Zambia's falls, parks, lakes, cities and cultural sites.",
   },
+  {
+    href: "/news",
+    emoji: "🔥",
+    title: "Trending Now",
+    problem: "Expectations set months ago, but conditions change weekly.",
+    solution:
+      "A live, ranked news feed powered by Firebase — Falls levels, wildlife, weather, culture and transport updates.",
+  },
 ];
 
 export default function Home() {
