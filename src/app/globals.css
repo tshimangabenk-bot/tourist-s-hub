@@ -1,26 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f6f1;
+  --foreground: #1c1a17;
+  --card: #ffffff;
+  --muted: #6b6559;
+  --border: #e6e1d6;
+  --primary: #1f7a4d;
+  --primary-fg: #ffffff;
+  --accent: #e08a1e;
+  --ring: #1f7a4d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #14130f;
+    --foreground: #ece8df;
+    --card: #1d1b16;
+    --muted: #9c9384;
+    --border: #2c2a23;
+    --primary: #34a06a;
+    --primary-fg: #06110b;
+    --accent: #f0a63c;
+    --ring: #34a06a;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+@keyframes fall-drop {
+  0% {
+    transform: translateY(-8%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
 }
