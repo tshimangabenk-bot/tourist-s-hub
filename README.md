@@ -133,6 +133,43 @@ npm run start    # serve the production build
 npm run lint     # eslint
 ```
 
+## Deploy on Render
+
+This repo ships a [`render.yaml`](./render.yaml) Blueprint, so Render can
+provision the service automatically.
+
+### Option A — Blueprint (recommended)
+
+1. Push this repo to GitHub (already done).
+2. In the [Render dashboard](https://dashboard.render.com), click
+   **New +** → **Blueprint**, and select this repository.
+3. Render reads `render.yaml` and creates a **Node web service** with:
+   - Build command: `npm ci && npm run build`
+   - Start command: `npm run start` (Next.js binds to Render's `$PORT`)
+   - Health check: `/`
+4. (Optional) Under the service's **Environment** tab, add your
+   `NEXT_PUBLIC_FIREBASE_*` values to enable the live news feed. They must be
+   set before the build runs; trigger a redeploy after adding them. Without
+   them the app still works using the bundled sample data.
+5. Click **Apply** — Render builds and deploys, then gives you a public
+   `https://<name>.onrender.com` URL. `autoDeploy` redeploys on every push to
+   `main`.
+
+### Option B — Manual web service
+
+If you prefer not to use the Blueprint, create **New + → Web Service**, connect
+the repo, and set:
+
+| Setting | Value |
+|---------|-------|
+| Runtime | Node |
+| Build command | `npm ci && npm run build` |
+| Start command | `npm run start` |
+| Environment | `NODE_VERSION=22.14.0` (+ optional `NEXT_PUBLIC_FIREBASE_*`) |
+
+> Note: the free Render plan spins the service down after inactivity, so the
+> first request after idle can take a few seconds to cold-start.
+
 ## Tech stack
 
 - Next.js 16 (App Router, Turbopack)

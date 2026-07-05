@@ -1,0 +1,33 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy: push to GitHub, then in Render choose "New +" → "Blueprint" and pick
+# this repo. Render reads this file and provisions the service automatically.
+services:
+  - type: web
+    name: tourists-hub
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      # Next.js 16 needs a modern Node runtime.
+      - key: NODE_VERSION
+        value: 22.14.0
+      # Firebase Web config (optional — the app falls back to sample data if unset).
+      # These are NEXT_PUBLIC_* so they must be present at BUILD time. Set the
+      # values in the Render dashboard (Environment) — they are not stored here.
+      - key: NEXT_PUBLIC_FIREBASE_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+        sync: false
+      - key: NEXT_PUBLIC_FIREBASE_APP_ID
+        sync: false
