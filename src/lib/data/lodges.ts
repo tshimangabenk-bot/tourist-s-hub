@@ -1,0 +1,148 @@
+import type { Lodge } from "@/lib/types";
+
+/**
+ * Lodges scored on the "Bush Reality Scale" so tourists match their comfort
+ * expectations to the actual terrain — not a generic 5-star hotel rating.
+ */
+export const LODGES: Lodge[] = [
+  {
+    id: "royal-livingstone",
+    name: "Riverfront Grand (Livingstone)",
+    park: "Mosi-oa-Tunya",
+    region: "Southern",
+    blurb:
+      "Polished riverside resort minutes from Victoria Falls. Zebra graze the manicured lawns but staff and structure keep it firmly resort-side.",
+    connectivity: 5,
+    fencing: 4,
+    tracking: 5,
+    pricePerNightUsd: 620,
+    bestMonths: ["may", "jun", "jul", "aug"],
+    highlights: ["Sundowner deck over the Zambezi", "Spa & pool", "Falls shuttle"],
+  },
+  {
+    id: "kafue-busanga",
+    name: "Busanga Plains Camp",
+    park: "Kafue National Park",
+    region: "North-Western",
+    blurb:
+      "Remote seasonal camp on the flooded Busanga grasslands. Lions, cheetah and vast horizons — and almost no one else.",
+    connectivity: 2,
+    fencing: 1,
+    tracking: 2,
+    pricePerNightUsd: 890,
+    bestMonths: ["aug", "sep", "oct"],
+    highlights: ["Hot-air balloon safaris", "Big cat country", "Fly-in only"],
+  },
+  {
+    id: "south-luangwa-mfuwe",
+    name: "Mfuwe Bush House",
+    park: "South Luangwa National Park",
+    region: "Eastern",
+    blurb:
+      "The home of the walking safari. Elephants famously stroll through reception in mango season. Unfenced and wonderfully wild.",
+    connectivity: 3,
+    fencing: 1,
+    tracking: 2,
+    pricePerNightUsd: 540,
+    bestMonths: ["jun", "jul", "aug", "sep", "oct"],
+    highlights: ["Walking safaris", "Leopard density", "Elephants in camp"],
+  },
+  {
+    id: "lower-zambezi-river",
+    name: "Lower Zambezi River Camp",
+    park: "Lower Zambezi National Park",
+    region: "Lusaka",
+    blurb:
+      "Canoe past hippos and elephants on the Zambezi. Tented luxury with the river as your unfenced boundary.",
+    connectivity: 3,
+    fencing: 2,
+    tracking: 3,
+    pricePerNightUsd: 710,
+    bestMonths: ["jun", "jul", "aug", "sep"],
+    highlights: ["Canoe safaris", "Tiger fishing", "River-view tents"],
+  },
+  {
+    id: "liuwa-plain-king",
+    name: "King Lewanika Camp",
+    park: "Liuwa Plain National Park",
+    region: "Western",
+    blurb:
+      "One of Africa's most remote camps on an endless plain. Second-largest wildebeest migration, total silence, total detox.",
+    connectivity: 1,
+    fencing: 1,
+    tracking: 1,
+    pricePerNightUsd: 1150,
+    bestMonths: ["nov", "dec", "jan"],
+    highlights: ["Wildebeest migration", "Pure wilderness", "Star beds"],
+  },
+  {
+    id: "lusaka-city-hotel",
+    name: "Cairo Road City Hotel",
+    park: "Lusaka",
+    region: "Lusaka",
+    blurb:
+      "Business-grade city hotel for transit nights. Full connectivity, secure parking, and airport transfers.",
+    connectivity: 5,
+    fencing: 5,
+    tracking: 5,
+    pricePerNightUsd: 130,
+    bestMonths: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+    highlights: ["Fast fibre wifi", "Conference rooms", "Airport shuttle"],
+  },
+  {
+    id: "kasanka-bat",
+    name: "Kasanka Forest Camp",
+    park: "Kasanka National Park",
+    region: "Central",
+    blurb:
+      "Base for the world's largest mammal migration — 10 million straw-coloured fruit bats. Rustic, community-run, low footprint.",
+    connectivity: 2,
+    fencing: 1,
+    tracking: 2,
+    pricePerNightUsd: 260,
+    bestMonths: ["nov", "dec"],
+    highlights: ["Bat migration", "Sitatunga antelope", "Birding hides"],
+  },
+  {
+    id: "north-luangwa-walk",
+    name: "North Luangwa Walking Trail",
+    park: "North Luangwa National Park",
+    region: "Northern",
+    blurb:
+      "Foot-only wilderness with no roads and no fences. For experienced travellers who want raw, guided tracking.",
+    connectivity: 1,
+    fencing: 1,
+    tracking: 1,
+    pricePerNightUsd: 950,
+    bestMonths: ["jun", "jul", "aug", "sep"],
+    highlights: ["Pure walking safari", "Black rhino recovery zone", "No vehicles"],
+  },
+  {
+    id: "lake-tanganyika-ndole",
+    name: "Ndole Bay Lodge",
+    park: "Nsumbu National Park",
+    region: "Northern",
+    blurb:
+      "Beach lodge on Lake Tanganyika. Snorkelling, kayaking and a relaxed pace — a bush-and-beach combo.",
+    connectivity: 3,
+    fencing: 3,
+    tracking: 4,
+    pricePerNightUsd: 300,
+    bestMonths: ["may", "jun", "jul", "aug", "sep"],
+    highlights: ["Freshwater snorkelling", "Sandy beaches", "Family friendly"],
+  },
+  {
+    id: "livingstone-backpackers",
+    name: "Zambezi Backpackers",
+    park: "Livingstone Town",
+    region: "Southern",
+    blurb:
+      "Sociable, budget-friendly hostel in Livingstone. Great wifi, walking distance to activities and the local market.",
+    connectivity: 4,
+    fencing: 5,
+    tracking: 5,
+    pricePerNightUsd: 35,
+    bestMonths: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+    highlights: ["Budget dorms", "Activity booking desk", "Central location"],
+  },
+];
