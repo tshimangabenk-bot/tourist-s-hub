@@ -104,6 +104,28 @@ export interface LanguageLesson {
   phrases: Phrase[];
 }
 
+export type NewsCategory =
+  | "Falls"
+  | "Wildlife"
+  | "Travel"
+  | "Culture"
+  | "Weather"
+  | "Transport";
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  summary: string;
+  category: NewsCategory;
+  source: string;
+  url?: string;
+  /** ISO date string. */
+  publishedAt: string;
+  /** Popularity/recency signal, 0-100. Higher trends first. */
+  trendingScore: number;
+  tags: string[];
+}
+
 export interface MapPoint {
   id: string;
   name: string;
